@@ -4,12 +4,14 @@ function updateStats(startTime) {
     let timeElapsed = Math.floor((Date.now() - startTime) / 1000);
     document.getElementById('clicks').textContent = totalClicks;
     document.getElementById('time').textContent = timeElapsed;
+    document.getElementById('scroll').textContent = Math.floor(scrollDistance);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    browser.storage.local.get(['startTime', 'totalClicks']).then(data => {
+    browser.storage.local.get(['startTime', 'scrollDistance', 'totalClicks']).then(data => {
         let startTime = data.startTime || Date.now();
         totalClicks = data.totalClicks || 0;
+        scrollDistance = data.scrollDistance || 0;
 
         if (!data.startTime) {
             browser.storage.local.set({ startTime, totalClicks});
