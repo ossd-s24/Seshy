@@ -10,7 +10,6 @@ function updateStats(startTime) {
         document.getElementById("time").textContent =Math.floor(timeSpent / 1000);
     });
 }
-
 document.addEventListener('DOMContentLoaded', () => {
     browser.storage.local.get(['startTime', 'scrollDistance', 'totalClicks']).then(data => {
         let startTime = data.startTime || Date.now();
@@ -27,6 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
             browser.storage.local.set({ totalClicks });
             updateStats(startTime);
         });
+        document.getElementById('reset').addEventListener('click',()=>{
+            totalClicks=-1;
+            scrollDistance=0
+            browser.storage.local.set({ totalClicks ,scrollDistance});
+            updateStats(startTime);
+            
+        });
 
     });
 });
+
+
